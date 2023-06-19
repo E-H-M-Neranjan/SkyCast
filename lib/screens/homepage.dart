@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                                   .color(Colors.black)
                                   .make(),
                               const SizedBox(
-                                height: 20,
+                                height: 10,
                               ),
                               Row(
                                 children: [
@@ -110,7 +110,7 @@ class HomePage extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              20.heightBox,
+                              10.heightBox,
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -146,9 +146,9 @@ class HomePage extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              20.heightBox,
+                              10.heightBox,
                               const Divider(),
-                              30.heightBox,
+                              10.heightBox,
                               FutureBuilder(
                                 future: controller.hourlyWeatherData,
                                 builder: (BuildContext context,
@@ -207,8 +207,85 @@ class HomePage extends StatelessWidget {
                                   );
                                 },
                               ),
-                              20.heightBox,
+                              10.heightBox,
                               const Divider(),
+                              10.heightBox,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  "Next 7 Days"
+                                      .text
+                                      .semiBold
+                                      .size(16)
+                                      .color(Colors.black)
+                                      .make(),
+                                  TextButton(
+                                      onPressed: () {},
+                                      child: "View All".text.make()),
+                                ],
+                              ),
+                              ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: 7,
+                                itemBuilder: (BuildContext context, int index) {
+                                  var day = DateFormat("EEEE").format(
+                                      DateTime.now()
+                                          .add(Duration(days: index + 1)));
+                                  return Card(
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 12),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                              child: day.text.semiBold
+                                                  .color(Colors.black)
+                                                  .make()),
+                                          Expanded(
+                                            child: TextButton.icon(
+                                                onPressed: null,
+                                                icon: Image.asset(
+                                                    "assets/weather/50n.png",
+                                                    width: 40),
+                                                label: "26$degree"
+                                                    .text
+                                                    .size(16)
+                                                    .color(Colors.black)
+                                                    .make()),
+                                          ),
+                                          RichText(
+                                            text: TextSpan(
+                                              children: [
+                                                const TextSpan(
+                                                  text: "37$degree /",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontFamily: "poppins",
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: " 26$degree",
+                                                  style: TextStyle(
+                                                    color:
+                                                        theme.iconTheme.color,
+                                                    fontFamily: "poppins",
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         );
